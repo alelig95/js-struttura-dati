@@ -63,115 +63,115 @@ const cards = [{
   },
   {
 
-    cardName: 'Sviluppatore guerriero',
+  cardName: 'Sviluppatore guerriero',
 
-    cost: {
-      genericCostNumber: 3,
-      costFields: [ // colors array con riferimento a fieldCodes
-        fieldCodes[2],
-        fieldCodes[3]
-      ],
-    },
+  cost: {
+    genericCostNumber: 3,
+    costFields: [ // colors array con riferimento a fieldCodes
+      fieldCodes[2],
+      fieldCodes[3]
+    ],
+  },
 
-    picture: 'images/g.png',  // da inserire immagine
-    cardType: cardTypes[3],
-    cardObject: 'Umano',
+  picture: 'images/g.png',  // da inserire immagine
+  cardType: cardTypes[3],
+  cardObject: 'Umano',
 
-    editionType: editions['BL'],
+  editionType: editions['BL'],
 
-    description: 'Lo sviluppatore guerriero spezza i byte in bit!',
-    story: 'Lo sviluppatore guerriero è una forma di essere umano evoluto.',
+  description: 'Lo sviluppatore guerriero spezza i byte in bit!',
+  story: 'Lo sviluppatore guerriero è una forma di essere umano evoluto.',
 
-    score: {
-      power: 5,  // r
-      toughness: 3
-    }
+  score: {
+    power: 5,  // r
+    toughness: 3
+  }
 
-    },
+  },
 
-    {
+  {
 
-      cardName: 'Sirena canterina',
+  cardName: 'Sirena canterina',
 
-      cost: {
-        genericCostNumber: 2,
-        costFields: [ // colors array con riferimento a fieldCodes
-          fieldCodes[0],
-          fieldCodes[1]
-        ],
-      },
+  cost: {
+    genericCostNumber: 2,
+    costFields: [ // colors array con riferimento a fieldCodes
+      fieldCodes[0],
+      fieldCodes[1]
+    ],
+  },
 
-      picture: 'images/g.png',  // da inserire immagine
-      cardType: cardTypes[5],
-      cardObject: 'Siren',
+  picture: 'images/g.png',  // da inserire immagine
+  cardType: cardTypes[5],
+  cardObject: 'Siren',
 
-      editionType: editions['SP'],
+  editionType: editions['SP'],
 
-      description: 'La sirena canterina ti ipnotizza col suo canto',
-      story: 'La sirena canterina è una creatura mitologica.',
+  description: 'La sirena canterina ti ipnotizza col suo canto',
+  story: 'La sirena canterina è una creatura mitologica.',
 
-      score: {
-        power: 1,  // r
-        toughness: 5
-      }
+  score: {
+    power: 1,  // r
+    toughness: 5
+  }
 
-      },
+  },
 
-      {
+  {
 
-        cardName: 'Soldato leggendario',
+  cardName: 'Soldato leggendario',
 
-        cost: {
-          genericCostNumber: 4,
-          costFields: [ // colors array con riferimento a fieldCodes
-            fieldCodes[0],
-            fieldCodes[1]
-          ],
-        },
+  cost: {
+    genericCostNumber: 4,
+    costFields: [ // colors array con riferimento a fieldCodes
+      fieldCodes[0],
+      fieldCodes[1]
+    ],
+  },
 
-        picture: 'images/g.png',  // da inserire immagine
-        cardType: cardTypes[3],
-        cardObject: 'Umano',
+  picture: 'images/g.png',  // da inserire immagine
+  cardType: cardTypes[3],
+  cardObject: 'Umano',
 
-        editionType: editions['BL'],
+  editionType: editions['BL'],
 
-        description: 'Un soldato imbattibile che riesce ad abbattere interi eserciti',
-        story: 'Il soldato leggendario è nato fortunato.',
+  description: 'Un soldato imbattibile che riesce ad abbattere interi eserciti',
+  story: 'Il soldato leggendario è nato fortunato.',
 
-        score: {
-          power: 3,  // r
-          toughness: 4
-        }
+  score: {
+    power: 3,  // r
+    toughness: 4
+  }
 
-        },
+  },
 
-        {
+  {
 
-          cardName: 'Kratos',
+  cardName: 'Kratos',
 
-          cost: {
-            genericCostNumber: 7,
-            costFields: [ // colors array con riferimento a fieldCodes
-              fieldCodes[1],
-              fieldCodes[3]
-            ],
-          },
+  cost: {
+    genericCostNumber: 7,
+    costFields: [ // colors array con riferimento a fieldCodes
+      fieldCodes[1],
+      fieldCodes[3]
+    ],
+  },
 
-          picture: 'images/g.png',  // da inserire immagine
-          cardType: cardTypes[5],
-          cardObject: 'Semidio',
+  picture: 'images/g.png',  // da inserire immagine
+  cardType: cardTypes[5],
+  cardObject: 'Semidio',
 
-          editionType: editions['SP'],
+  editionType: editions['SP'],
 
-          description: 'Un guerriero potentissimo, figlio di Zeus. ',
-          story: 'Non sa chi sia la madre, ma non gli interessa.',
+  description: 'Un guerriero potentissimo, figlio di Zeus. ',
+  story: 'Non sa chi sia la madre, ma non gli interessa.',
 
-          score: {
-            power: 5,  // r
-            toughness: 5
-          }
+  score: {
+    power: 4,  // r
+    toughness: 5
+  }
 
-          },
+  },
 ]
 
 console.log(cards);
@@ -184,7 +184,7 @@ function filterByPower(powerValue, array) {
 
 function render(DOMElement, array) {
   const cardListHTML = document.getElementById(DOMElement)
-
+  cardListHTML.innerHTML = '';
   array.forEach((element) => {
     cardListHTML.innerHTML += `<li> ${element.cardName} </li>`
   });
@@ -206,6 +206,12 @@ function renderSelect(DOMElement, array) {
 renderSelect('powerSelect', powerValues)
 
 $('#powerSelect').change(function () {
-  
-
+  const selectValue = parseInt($(this).val());
+  console.log(selectValue);
+  if (isNaN(selectValue)) {
+    render('listaCarte', cards)
+    return;
+  };
+  const filteredArray = filterByPower(selectValue, cards);
+  render('listaCarte', filteredArray);
 });
